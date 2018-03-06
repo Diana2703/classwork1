@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>
+		Календарь
+	</title>
+		<script>
+			function crCalen()
+			{
+				var countDay = document.getElementById("mounth").value*1;
+				var needDay = document.getElementById("day").value*1;
+				switch(countDay)
+				{
+					case(1):
+					case(3):
+					case(5):
+					case(7):
+					case(8):
+					case(10):
+					case(12):
+						countDay = 31;
+						break;
+					case(2):
+						countDay = 28;
+						break;
+					default:
+						countDay = 30;
+						break;
+				}
+				var Out = "";
+				for(var i = 1;i <= countDay; i++)
+				{
+					if(i < 10)
+						Out += "&nbsp;&nbsp;";
+						Out += "&nbsp;&nbsp;<span class='"+(((i+1)%7==0 || i%7==0)?"wik":"")+((i==needDay)?"light":"")+"'>"+i+"</span>";
+
+					if (i%7==0)
+						Out +="</br>";
+				}
+
+
+				document.getElementById("result").innerHTML = Out;
+			}
+		</script>
+			<style>
+				.light
+				{
+				color:red;
+				}
+				.wik
+				{
+				font-weight: bold;
+				}
+			</style>
+	</head>
+	<body>
+		<form>
+			Введите месяц
+			<input type="text" name="mounth" id="mounth"><br>
+			Введите число
+			<input type="text" name="" id="day"><br>
+			<input type="button" onclick="crCalen()" value="Send">
+		</form>
+		Календарь:<br/>
+		<div id = "result">
+	</body>
+</html>

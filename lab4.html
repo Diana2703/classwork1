@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+		<title>
+			Квадраты
+		</title>
+		<style>
+			#square
+			{
+				height: 120px;
+				width: 120px;
+				background: #1E90FF;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body onmousemove="mouseCoords(event)">
+		<div id="square">
+		<div id="result"></div>
+		</div>
+		<script>
+			var square = document.getElementById('square');
+			/** function  - отслеживает нажатие
+			 *@author Сафина Диана
+			 *@version 1.5
+			 *@param e- событие
+			 *@return элемент в соответствующее множество
+			*/
+		    square.onmousedown = function(e) { // 1. отследить нажатие
+		    moveAt(e);
+			
+		    /** function moveAt - передвигает квадрат под координаты курсора и сдвигает на половину ширины/высоты для центрирования
+			 *@param e - событие
+			*/
+		    function moveAt(e) {
+				square.style.left = e.pageX - square.offsetWidth / 2 + 'px';
+				square.style.top = e.pageY - square.offsetHeight / 2 + 'px';
+		    }
+			
+			/** function перемещает по экрану
+			 *@param e - событие
+			 *see moveAt(e)
+			*/
+		    document.onmousemove = function(e) {
+			moveAt(e);
+		  }
+
+		  /** function - отслеиживает окончание переноса
+		  */
+		  square.onmouseup = function() {
+			document.onmousemove = null;
+			square.onmouseup = null;
+		  }
+		}
+		
+		/** function mouseCoords - передаёт координаты мыши
+			 *@param e - событие
+		*/
+		function mouseCoords(e) {
+			x = e.pageX;
+			y = e.pageY; 
+			document.getElementById("result").innerHTML = "X : " + x + ", Y : " + y;
+		}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Лабораторная работа №3
+		</title>
+		<style>
+			#inputMass
+			{
+			width: 100px;
+			height: 100px;
+			}
+			.green
+			{
+			background: green;
+			color: white;
+			}
+			.blue
+			{
+			background: blue;
+			color: white;
+			}
+			.red
+			{
+			background: red;
+			color: white;
+			}
+			.orange
+			{
+			background: orange;
+			color: white;
+			}
+			.purple
+			{
+			background: purple;
+			color: white;
+			}
+			.yellow
+			{
+			background: yellow;
+			color: black;
+			}
+			.pink
+			{
+			background: pink;
+			color: black;
+			}
+			.wik
+			{
+			font-weight: bold;
+			}
+		</style>
+		<script>
+		
+			/**
+			*Функция GetMassFromStr служит для получения массива
+			*
+			*@return возвращает требуемый массив
+			*/
+
+
+			function GetMassFromStr(str) 
+			{
+
+				/**Переменной присвпиваем массив*/
+
+				var mass = str.split("\n");
+				for(var i = 0; i < mass.length; i++)
+					mass[i] = mass[i].split(" ");
+				return mass;
+			}
+
+
+
+			/**
+			*Функция PrintM отрисовывает
+			*
+			*@param mass - массив
+			*@return возвращает дополненный классами массив 
+			*/
+
+
+			function PrintM(mass)
+			{
+				var OutStr = "<table>";
+				var n = mass.length; 
+
+				for(var i = 0; i < n; i++)
+				{ 
+					OutStr += "<tr>";
+					for (var j = 0; j < mass[i].length; j++)
+					{
+						OutStr += "<td class ='";
+
+						if (i == j)
+							OutStr += " green";
+
+						if ((n - i - 1) == j)
+							OutStr += " blue";
+
+						if ((i > j) && (j < (n - i - 1)))
+							OutStr += " orange";
+
+						if ((i < j) && (j < (n - i - 1)))
+							OutStr += " pink";
+
+						if ((i > j) && (j > (n - i - 1)))
+							OutStr += " purple";
+
+						if ((i < j) && (j > (n - i - 1)) && (j < n))
+							OutStr += " yellow";
+
+						if ((j >= n)||(i>=n))
+							OutStr += " red";
+
+							OutStr += "'>"; 
+						if ((mass[i][j]%2==0))
+						{
+							OutStr += "<span class='"+(mass[i][j]?"wik":"")+"'>"+mass[i][j]+"</span>"+ "</td>";
+
+						} else OutStr += mass[i][j] + "</td>";
+					}
+					OutStr += "</tr>";
+				}
+				OutStr += "</table>";
+				document.getElementById("res").innerHTML = OutStr;
+			}
+
+			/** Функция main, которая вызывается при нажатии клавиши 
+			*@see PrintM(InputMass)
+			*/
+			function main()
+			{
+				var InputMass = GetMassFromStr(document.getElementById("inputMass").value);
+				PrintM(InputMass);
+			}
+		</script>
+	</head>
+	<body>
+		<form>
+			Введите элементы массива:
+			<textarea id = "inputMass"></textarea >
+			<input type = "button" onclick = "main()" value="Send"><br>
+		</form>
+		Вывод:<br/>
+		<div id ="res"> </div>
+	</body>
+</html>
